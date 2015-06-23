@@ -1,0 +1,21 @@
+{
+  "name": "amonger/command",
+  "description": "The command pattern for PHP 5.3",
+  "require-dev": {
+    "phpunit/phpunit": "^4.7",
+    "mockery/mockery": "^0.9.4"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alan Monger",
+      "email": "alan@alanmonger.co.uk"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Command\\": "src/"
+    }
+  }
+}
