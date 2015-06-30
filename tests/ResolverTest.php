@@ -5,7 +5,7 @@ class ResolverTest extends PHPUnit_Framework_TestCase
 {
     public function setup()
     {
-        $this->resolver = new Command\Resolver;
+        $this->resolver = new Command\Resolver\SeparateFileResolver;
     }
 
     public function testResolverResolvesHandler()

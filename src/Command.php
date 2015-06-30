@@ -1,6 +1,7 @@
 <?php
 
 namespace Command;
+use Command\Resolver\ResolverInterface;
 
 /**
  * A simple command pattern implementation for dispatching commands
