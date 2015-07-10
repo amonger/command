@@ -1,7 +1,6 @@
 <?php
 
-
-class ResolverTest extends PHPUnit_Framework_TestCase
+class SeparateFileResolverTest extends PHPUnit_Framework_TestCase
 {
     public function setup()
     {
@@ -10,7 +9,7 @@ class ResolverTest extends PHPUnit_Framework_TestCase
 
     public function testResolverResolvesHandler()
     {
-        $resolved = $this->resolver->resolve('\\App\\Command\\TestCommand');
+        $resolved = $this->resolver->getClassName('\\App\\Command\\TestCommand');
         $this->assertEquals('\\App\\Handler\\TestHandler', $resolved);
     }
 }

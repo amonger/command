@@ -2,6 +2,8 @@
 
 namespace Command\Resolver;
 
+use Command\Contracts\ApplicationInterface;
+
 /**
  * This maps the command object to a handler by rewriting the parent namespace
  * and the command ending from "command" to "handler".
@@ -13,12 +15,26 @@ namespace Command\Resolver;
  */
 class SeparateFileResolver implements ResolverInterface
 {
+    private $application = null;
+
+    public function resolve($object)
+    {
+        $className = $this->getClassName(get_class($object));
+
+        $handler = new $className;
+        if ($object instanceof ApplicationInterface) {
+            $object->setApplication($this->application);
+        }
+
+        return $handler;
+    }
+
     /**
      * @param string $dto
      *
      * @return string
      */
-    public function resolve($dto)
+    public function getClassName($dto)
     {
         $segments = explode('\\', $dto);
         $class = $this->renameAsHandler(array_pop($segments));
@@ -37,5 +53,13 @@ class SeparateFileResolver implements ResolverInterface
     private function renameAsHandler($string)
     {
         return str_replace('Command', 'Handler', $string);
+    }
+
+    /**
+     * @param null $application
+     */
+    public function setApplication($application)
+    {
+        $this->application = $application;
     }
 }
