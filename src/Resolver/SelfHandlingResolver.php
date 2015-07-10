@@ -2,6 +2,8 @@
 
 namespace Command\Resolver;
 
+use Command\Contracts\ApplicationInterface;
+
 /**
  * This returns the same class name so the handle method is run on the command object
  *
@@ -9,13 +11,27 @@ namespace Command\Resolver;
  */
 class SelfHandlingResolver implements ResolverInterface
 {
+    private $application = null;
+
     /**
-     * @param string $dto
-     *
-     * @return string
+     * @param ApplicationInterface $dto
+     * @return ApplicationInterface
      */
     public function resolve($dto)
     {
+        if ($dto instanceof ApplicationInterface) {
+            $dto->setApplication($this->application);
+        }
+
         return $dto;
+    }
+
+    /**
+     * @param $application
+     * @return void
+     */
+    public function setApplication($application)
+    {
+        $this->application = $application;
     }
 }

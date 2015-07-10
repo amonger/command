@@ -1,6 +1,8 @@
 <?php
 
 namespace Command;
+
+use Command\Contracts\ApplicationInterface;
 use Command\Resolver\ResolverInterface;
 
 /**
@@ -8,19 +10,16 @@ use Command\Resolver\ResolverInterface;
  *
  * Class Command
  */
-class Command
+class Command implements CommandInterface
 {
     private $resolver;
-    private $container;
 
     /**
      * @param ResolverInterface $resolver
-     * @param null $container
      */
-    public function __construct(ResolverInterface $resolver, $container = null)
+    public function __construct(ResolverInterface $resolver)
     {
         $this->resolver = $resolver;
-        $this->container = $container;
     }
 
     /**
@@ -28,13 +27,12 @@ class Command
      * captured, and the last two segments of the path are renamed to
      * handler which is then passed the DTO.
      *
-     * @param $object
+     * @param ApplicationInterface $object
      * @return mixed
      */
     public function dispatch($object)
     {
-        $handler = $this->resolver->resolve(get_class($object));
-        $handlerObject = new $handler($this->container);
+        $handlerObject = $this->resolver->resolve($object);
 
         return call_user_func(array($handlerObject, 'handle'), $object);
     }
