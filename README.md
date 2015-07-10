@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/amonger/command.svg?branch=master)](https://travis-ci.org/amonger/command)
 #Command#
 
 This is a simple command bus for use with PHP 5.3
@@ -8,7 +9,7 @@ This is a simple command bus for use with PHP 5.3
 <?php
     namespace Command\Command;
 
-    class MyHandlerCommand 
+    class MyHandlerCommand
     {
         public $someParam;
 
