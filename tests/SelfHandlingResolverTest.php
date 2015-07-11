@@ -1,7 +1,7 @@
 <?php
 
 use Command\Contracts\ApplicationInterface;
-use Command\Contracts\SelfHandling;
+use Command\Contracts\SelfHandlingInterface;
 use Command\Resolver\SelfHandlingResolver;
 use Mockery as m;
 
@@ -33,7 +33,7 @@ class SelfHandlingResolverTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class CommandStub implements SelfHandling, ApplicationInterface
+class CommandStub implements SelfHandlingInterface, ApplicationInterface
 {
     private $number;
     private $application;

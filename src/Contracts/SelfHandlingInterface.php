@@ -2,7 +2,7 @@
 
 namespace Command\Contracts;
 
-interface SelfHandling
+interface SelfHandlingInterface
 {
     /**
      * @return mixed

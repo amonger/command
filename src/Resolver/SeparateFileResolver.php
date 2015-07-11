@@ -3,6 +3,7 @@
 namespace Command\Resolver;
 
 use Command\Contracts\ApplicationInterface;
+use Command\Contracts\ResolverInterface;
 
 /**
  * This maps the command object to a handler by rewriting the parent namespace
@@ -13,7 +14,7 @@ use Command\Contracts\ApplicationInterface;
  *
  * Class SeparateFileResolver
  */
-class SeparateFileResolver implements ResolverInterface
+class SeparateFileResolver implements ResolverInterface, ApplicationInterface
 {
     private $application = null;
 
