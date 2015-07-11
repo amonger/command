@@ -1,16 +1,15 @@
 <?php
 
 namespace Command;
+use Command\Contracts\ResolverInterface;
 
-use Command\Contracts\ApplicationInterface;
-use Command\Resolver\ResolverInterface;
 
 /**
  * A simple command pattern implementation for dispatching commands
  *
  * Class Command
  */
-class Command implements CommandInterface
+class Command
 {
     private $resolver;
 

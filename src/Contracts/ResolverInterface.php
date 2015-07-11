@@ -1,8 +1,6 @@
 <?php
 
-namespace Command\Resolver;
-
-use Command\Contracts\ApplicationInterface;
+namespace Command\Contracts;
 
 interface ResolverInterface
 {
