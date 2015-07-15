@@ -16,7 +16,8 @@ class SelfHandlingResolver implements ResolverInterface, ApplicationInterface
 
     /**
      * @param ApplicationInterface $dto
-     * @return ApplicationInterface
+     *
+     * @return object
      */
     public function resolve($dto)
     {
@@ -29,6 +30,7 @@ class SelfHandlingResolver implements ResolverInterface, ApplicationInterface
 
     /**
      * @param $application
+     *
      * @return void
      */
     public function setApplication($application)

@@ -31,6 +31,8 @@ class SelfHandlingResolverTest extends PHPUnit_Framework_TestCase
         $command = new Command\Command($resolver);
         $this->assertEquals(4, $command->dispatch(new CommandStub(2)));
     }
+
+
 }
 
 class CommandStub implements SelfHandlingInterface, ApplicationInterface
