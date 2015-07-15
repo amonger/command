@@ -23,8 +23,8 @@ class SeparateFileResolver implements ResolverInterface, ApplicationInterface
         $className = $this->getClassName(get_class($object));
 
         $handler = new $className;
-        if ($object instanceof ApplicationInterface) {
-            $object->setApplication($this->application);
+        if ($handler instanceof ApplicationInterface) {
+            $handler->setApplication($this->application);
         }
 
         return $handler;
