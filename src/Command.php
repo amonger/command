@@ -5,7 +5,6 @@ namespace Command;
 use Command\Contracts\ResolverInterface;
 use ReflectionClass;
 
-
 /**
  * A simple command pattern implementation for dispatching commands
  *
@@ -31,8 +30,8 @@ class Command
      * If it is a string generate a new object and use post vars to
      * attempt to construct the new object
      *
-     * @param $object
-     * @return mixed
+     * @param string|object $object
+     * @return object
      */
     public function dispatch($object)
     {
@@ -48,14 +47,15 @@ class Command
      * Use reflection to get the class constructor values, and map each one to
      * a POST variable.
      *
-     * @param $object
-     * @return \ReflectionParameter[]
+     * @param string $object
+     *
+     * @return object
      */
     public function populateObjectFromPost($object)
     {
         $reflectionClass = new ReflectionClass($object);
         $parameters = $reflectionClass->getConstructor()->getParameters();
-        $postVars = $this->uniformify($_POST);
+        $postVars = $this->normalise($_POST);
         array_walk($parameters, function (&$value) use ($postVars) {
             $value = $postVars[$value->name];
         });
@@ -66,10 +66,11 @@ class Command
     /**
      * Convert post variables to camelcase
      *
-     * @param $variables
-     * @return mixed
+     * @param array $variables
+     *
+     * @return array
      */
-    private function uniformify($variables)
+    private function normalise($variables)
     {
         $parameters = array();
         foreach ($variables as $key => $value) {
@@ -83,22 +84,23 @@ class Command
     /**
      * Iterate through the deliminators and convert to camelcase when a pattern matches
      *
-     * @param $string
-     * @param $deliminatorArray
+     * @param string $string
+     * @param array|string $deliminator
+     *
      * @return string
      */
-    private function convertToCamelCase($string, $deliminatorArray)
+    private function convertToCamelCase($string, $deliminator)
     {
-        if (is_array($deliminatorArray)) {
-            $currentDeliminator = array_pop($deliminatorArray);
-            if (count($deliminatorArray) > 0) {
-                $string = $this->convertToCamelCase($string, $deliminatorArray);
+        if (is_array($deliminator)) {
+            $currentDeliminator = array_pop($deliminator);
+            if (count($deliminator) > 0) {
+                $string = $this->convertToCamelCase($string, $deliminator);
             }
             return $this->convertToCamelCase($string, $currentDeliminator);
         }
 
         return lcfirst(implode('', array_map(function ($chunk) {
             return ucfirst($chunk);
-        }, explode($deliminatorArray, $string))));
+        }, explode($deliminator, $string))));
     }
 }

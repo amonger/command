@@ -18,6 +18,11 @@ class SeparateFileResolver implements ResolverInterface, ApplicationInterface
 {
     private $application = null;
 
+    /**
+     * @param ApplicationInterface $object
+     *
+     * @return object
+     */
     public function resolve($object)
     {
         $className = $this->getClassName(get_class($object));
@@ -49,7 +54,8 @@ class SeparateFileResolver implements ResolverInterface, ApplicationInterface
 
     /**
      * @param $string
-     * @return mixed
+     *
+     * @return string
      */
     private function renameAsHandler($string)
     {
@@ -57,7 +63,9 @@ class SeparateFileResolver implements ResolverInterface, ApplicationInterface
     }
 
     /**
-     * @param null $application
+     * @param mixed $application
+     *
+     * @return void
      */
     public function setApplication($application)
     {
